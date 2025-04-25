@@ -15,5 +15,5 @@ public class TransactionRequestDTO {
     private Double valor;
 
     @NotNull
-    private OffsetDateTime data;
+    private OffsetDateTime dataHora;
 }

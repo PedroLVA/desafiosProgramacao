@@ -8,26 +8,24 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.OffsetDateTime;
 
 @AllArgsConstructor
-@RestController("/transacao")
+@RestController
+@RequestMapping("/transacao")
 public class TransactionController {
 
     private final TransactionService transactionService;
 
     @PostMapping
     private ResponseEntity<Void> createTransaciton(@Valid @RequestBody TransactionRequestDTO request){
-        if(request.getData().isAfter(OffsetDateTime.now())){
+        if(request.getDataHora().isAfter(OffsetDateTime.now())){
             //as requested in the challenge description
             return ResponseEntity.unprocessableEntity().build();
         }
-        transactionService.addTransaction(new Transaction(request.getValor(), request.getData()));
+        transactionService.addTransaction(new Transaction(request.getValor(), request.getDataHora()));
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
