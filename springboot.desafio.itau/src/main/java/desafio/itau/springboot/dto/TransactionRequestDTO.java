@@ -7,11 +7,12 @@ import lombok.Getter;
 
 import java.time.OffsetDateTime;
 
+@AllArgsConstructor
 @Getter
 public class TransactionRequestDTO {
     //not null e valores nao podem ser menor que 0
     @NotNull
-
+    @Min(0)
     private Double valor;
 
     @NotNull

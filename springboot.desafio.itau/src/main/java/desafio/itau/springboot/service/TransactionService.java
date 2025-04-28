@@ -19,6 +19,10 @@ public class TransactionService {
         transactions.add(transaction);
     }
 
+    public Queue<Transaction> getTransactions(){
+        return transactions;
+    }
+
     public void clearTransactions(){
         transactions.clear();
     }
