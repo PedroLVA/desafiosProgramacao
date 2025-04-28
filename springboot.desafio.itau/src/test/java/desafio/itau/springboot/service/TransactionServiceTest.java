@@ -128,12 +128,11 @@ class TransactionServiceTest {
     }
 
 
-
-    Transaction createTransaction(double valor, OffsetDateTime dataHora){
+    private Transaction createTransaction(double valor, OffsetDateTime dataHora){
         return new Transaction(valor, dataHora);
     }
 
-    TransactionRequestDTO createTransactionRequestDTO(double valor, OffsetDateTime dataHora){
+    private TransactionRequestDTO createTransactionRequestDTO(double valor, OffsetDateTime dataHora){
         return new TransactionRequestDTO(valor, dataHora);
     }
 
