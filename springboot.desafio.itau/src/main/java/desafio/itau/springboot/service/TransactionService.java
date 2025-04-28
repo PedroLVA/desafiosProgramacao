@@ -1,6 +1,8 @@
 package desafio.itau.springboot.service;
 
+import desafio.itau.springboot.dto.TransactionRequestDTO;
 import desafio.itau.springboot.model.Transaction;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.OffsetDateTime;
@@ -27,6 +29,10 @@ public class TransactionService {
                 .filter(t -> t.getData().isAfter(now.minusSeconds(60)))
                 .mapToDouble(Transaction::getValor)
                 .summaryStatistics();
+    }
+
+    public boolean validateTransaction(TransactionRequestDTO request){
+        return !request.getDataHora().isAfter(OffsetDateTime.now()) && request.getValor() >= 0;
     }
 
 }

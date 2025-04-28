@@ -21,7 +21,8 @@ public class TransactionController {
 
     @PostMapping
     private ResponseEntity<Void> createTransaciton(@Valid @RequestBody TransactionRequestDTO request){
-        if(request.getDataHora().isAfter(OffsetDateTime.now())){
+        if(!transactionService.validateTransaction(request)){
+            //Aqui a gente poderia criar uma função pra validar
             //as requested in the challenge description
             return ResponseEntity.unprocessableEntity().build();
         }
