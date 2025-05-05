@@ -20,18 +20,14 @@ public class TransactionController {
     private final TransactionService transactionService;
 
     @PostMapping
-    private ResponseEntity<Void> createTransaciton(@Valid @RequestBody TransactionRequestDTO request){
-        if(!transactionService.validateTransaction(request)){
-            //Aqui a gente poderia criar uma função pra validar
-            //as requested in the challenge description
-            return ResponseEntity.unprocessableEntity().build();
-        }
+    public ResponseEntity<Void> createTransaction(@Valid @RequestBody TransactionRequestDTO request) {
+        transactionService.validateTransaction(request);
         transactionService.addTransaction(new Transaction(request.getValor(), request.getDataHora()));
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @DeleteMapping
-    private ResponseEntity<Void> clearTransactions(){
+    public ResponseEntity<Void> clearTransactions() {
         transactionService.clearTransactions();
         return ResponseEntity.ok().build();
     }

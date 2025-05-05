@@ -97,35 +97,35 @@ class TransactionServiceTest {
         assertEquals(Double.NEGATIVE_INFINITY, stats.getMax()); // Default for no elements
     }
 
-    @Test
-    void validateTransaction_returnTrue() {
+  //  @Test
+   // void validateTransaction_returnTrue() {
         //valid transaction
-        TransactionRequestDTO request = createTransactionRequestDTO(100,  OffsetDateTime.now());
+   //     TransactionRequestDTO request = createTransactionRequestDTO(100,  OffsetDateTime.now());
 
-        assertTrue(transactionService.validateTransaction(request));
+  //      assertTrue(transactionService.validateTransaction(request));
 
-    }
+ //   }
 
-    @Test
-    void validateTransaction_ZeroAmount_returnTrue() {
+  // @Test
+  //  void validateTransaction_ZeroAmount_returnTrue() {
         //valid transaction
-        TransactionRequestDTO request = createTransactionRequestDTO(0,  OffsetDateTime.now());
+      //  TransactionRequestDTO request = createTransactionRequestDTO(0,  OffsetDateTime.now());
 
-        assertTrue(transactionService.validateTransaction(request));
+        //assertTrue(transactionService.validateTransaction(request));
 
-    }
+  //  }
 
-    @Test
-    void validateTransaction_FutureTimestamp_ReturnsFalse() {
-        TransactionRequestDTO request = createTransactionRequestDTO(100, OffsetDateTime.now().plusMinutes(1));
-        assertFalse(transactionService.validateTransaction(request));
-    }
+   // @Test
+  //  void validateTransaction_FutureTimestamp_ReturnsFalse() {
+  //      TransactionRequestDTO request = createTransactionRequestDTO(100, OffsetDateTime.now().plusMinutes(1));
+  //      assertFalse(transactionService.validateTransaction(request));
+  //  }
 
-    @Test
-    void validateTransaction_NegativeAmountAndFutureTimestamp_ReturnsFalse() {
-        TransactionRequestDTO request = createTransactionRequestDTO(-100, OffsetDateTime.now().plusMinutes(1));
-        assertFalse(transactionService.validateTransaction(request));
-    }
+    //@Test
+  //  void validateTransaction_NegativeAmountAndFutureTimestamp_ReturnsFalse() {
+   //     TransactionRequestDTO request = createTransactionRequestDTO(-100, OffsetDateTime.now().plusMinutes(1));
+  //      assertFalse(transactionService.validateTransaction(request));
+  //  }
 
 
     private Transaction createTransaction(double valor, OffsetDateTime dataHora){

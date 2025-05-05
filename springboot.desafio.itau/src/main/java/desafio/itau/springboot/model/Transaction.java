@@ -12,6 +12,7 @@ import java.time.OffsetDateTime;
 @AllArgsConstructor
 public class Transaction {
     //Como tenho um all args constructor, nao preciso de setters
+
     private double valor;
     private OffsetDateTime data;
 }

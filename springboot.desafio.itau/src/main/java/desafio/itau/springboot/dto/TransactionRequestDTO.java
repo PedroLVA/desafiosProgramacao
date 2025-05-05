@@ -11,10 +11,9 @@ import java.time.OffsetDateTime;
 @Getter
 public class TransactionRequestDTO {
     //not null e valores nao podem ser menor que 0
-    @NotNull
-    @Min(0)
+    @NotNull(message = "Transaction value cannot be null")
     private Double valor;
 
-    @NotNull
+    @NotNull(message = "Transaction value cannot be null")
     private OffsetDateTime dataHora;
 }
