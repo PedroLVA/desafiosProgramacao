@@ -12,7 +12,7 @@ public class ErrorResponse {
     private String message;
     private OffsetDateTime date;
 
-    ErrorResponse(int status, String message){
+    public ErrorResponse(int status, String message){
         this.status = status;
         this.message = message;
         this.date = OffsetDateTime.now();
