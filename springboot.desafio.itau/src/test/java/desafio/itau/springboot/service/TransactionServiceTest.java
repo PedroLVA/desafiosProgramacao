@@ -1,9 +1,12 @@
 package desafio.itau.springboot.service;
 
 import desafio.itau.springboot.dto.TransactionRequestDTO;
+import desafio.itau.springboot.exception.FutureTransactionException;
+import desafio.itau.springboot.exception.NegativeValueException;
 import desafio.itau.springboot.model.Transaction;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 
 import java.time.OffsetDateTime;
 import java.util.Date;
@@ -16,14 +19,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TransactionServiceTest {
 
+    @InjectMocks
     private TransactionService transactionService;
+
 
     @BeforeEach
     public void setup(){
         transactionService = new TransactionService();
     }
 
-    //Aqui deve
     @Test
     void addTransaction_Sucess() {
         Transaction transaction = createTransaction(100,  OffsetDateTime.parse("2025-04-28T15:11:16.789-03:00"));
@@ -97,16 +101,43 @@ class TransactionServiceTest {
         assertEquals(Double.NEGATIVE_INFINITY, stats.getMax()); // Default for no elements
     }
 
-  //  @Test
-   // void validateTransaction_returnTrue() {
-        //valid transaction
-   //     TransactionRequestDTO request = createTransactionRequestDTO(100,  OffsetDateTime.now());
+    @Test
+    void validateTransaction_ValidTransaction_NoExceptionThrown() {
 
-  //      assertTrue(transactionService.validateTransaction(request));
+        TransactionRequestDTO request = createTransactionRequestDTO(100, OffsetDateTime.now());
 
- //   }
 
-  // @Test
+        assertDoesNotThrow(() -> transactionService.validateTransaction(request));
+    }
+
+    @Test
+    void validateTransaction_ZeroAmount_NoExceptionThrown() {
+
+        TransactionRequestDTO request = createTransactionRequestDTO(0, OffsetDateTime.now());
+
+
+        assertDoesNotThrow(() -> transactionService.validateTransaction(request));
+    }
+
+    @Test
+    void validateTransaction_NegativeAmount_NegativeValueExceptionThrown(){
+
+        TransactionRequestDTO request = createTransactionRequestDTO(-10, OffsetDateTime.now());
+
+        assertThrows(NegativeValueException.class, () -> transactionService.validateTransaction(request));
+    }
+
+    @Test
+    void validateTransaction_FutureTimestamp_FutureTransactionExceptionThrown(){
+
+        TransactionRequestDTO request = createTransactionRequestDTO(10, OffsetDateTime.now().plusHours(10));
+
+        assertThrows(FutureTransactionException.class, () -> transactionService.validateTransaction(request));
+    }
+
+
+
+    // @Test
   //  void validateTransaction_ZeroAmount_returnTrue() {
         //valid transaction
       //  TransactionRequestDTO request = createTransactionRequestDTO(0,  OffsetDateTime.now());
