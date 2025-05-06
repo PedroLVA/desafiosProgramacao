@@ -7,14 +7,8 @@ import desafio.itau.springboot.model.Transaction;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
-
 import java.time.OffsetDateTime;
-import java.util.Date;
 import java.util.DoubleSummaryStatistics;
-import java.util.Queue;
-import java.util.concurrent.ConcurrentLinkedQueue;
-
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class TransactionServiceTest {
